@@ -8,7 +8,7 @@
 	<form id="sign-up-form">
 
 		<label for="contest1_name">What is your favourite music?</label>
-		<select name="contest1_name" required>
+		<select name="contest1_name" id="contest1_name-selection" required>
 			<option value="" disabled selected>Select Your Answer</option>
 			<option value="Rock/Metal">Rock/Metal</option>
 			<option value="Urban/R&B ">Urban/R&B </option>
@@ -17,13 +17,13 @@
 		</select>
 
 		<label for="first_name">First name:</label>
-		<input type="text" name="first_name" required/>
+		<input type="text" name="first_name" id="first_name" required/>
 
 		<label for="last_name">Last name:</label>
-		<input type="text" name="last_name" required/>
+		<input type="text" name="last_name" id="last_name" required/>
 
 		<label>Country/Region</label>
-		<select name="country" required>
+		<select name="country" id="country-selection" required>
 			<option value = "" disabled selected>Select Your Country/Region</option>
 			<option value="GB">United Kingdom</option>
 			<option value="AF">Afghanistan</option>
@@ -270,7 +270,7 @@
 		</select>
 
 		<label for="email">Email:</label>
-		<input type="email" name="email" placeholder="name@email.com" required/>
+		<input type="email" name="email" id="email" placeholder="name@email.com" required/>
 
 		<label>Date of Birth</label>
 		<select name="birth_day" id="birth_day" required>
@@ -458,18 +458,69 @@
 			    age--;
 			}
 			return age
+		}
 
+	function validateEmail(email) { 
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+		}
+		function validate(){
+		  var email = document.getElementById('email').value;
+		  if (validateEmail(email)) {
+		  	console.log("valid email address")
+		  } else {
+		  	console.log("invalid email address")
+		  }
+		  return false;
 		}
 
 		document.getElementById("submit-form").addEventListener("click", function () {
 
+			var contest1 = document.getElementById("contest1_name-selection").value;
+			var first_name = document.getElementById("first_name").value;
+			var last_name = document.getElementById("last_name").value;
+			var country = document.getElementById("country-selection").value;
+			var birth_day = document.getElementById("birth_day").value;
+			var birth_month = document.getElementById("birth_month").value;
+			var birth_year = document.getElementById("birth_year").value;
+
 			age = calculateAge();
-			if (age >= 14){
+
+			if (contest1 == ""){
+		    console.log("Please select a music style")
+			}
+			if (first_name == ""){
+				console.log("Please enter your first name")
+			}
+			if (last_name == ""){
+				console.log("Please enter your last name")
+			}
+			if (country == ""){
+		    console.log("Please select a country of residence")
+			} 
+			if (birth_day == ""){
+				console.log("Please enter your day of birth")
+			}
+			if (birth_month == ""){
+				console.log("Please enter your month of birth")
+			}
+			if (birth_year == ""){
+				console.log("Please enter your year of birth")
+			}
+			if (age <14){ 
+							console.log("Sorry users must be older than 14 years old")
+						}
+			if (!validateEmail(email)){
+				console.log("Please enter a valid email address")
+			}
+			if(!this.form.privacy_check.checked) {
+			  console.log('You must agree to the terms first.');
+			}
+			if (((contest1 && first_name) && (last_name && country)) && (age >= 14 && this.form.privacy_check.checked)){
+				console.log("music style and first name and last name and country selected and over 14 and privacy checked")
 				form.submit();
 				console.log("Form Submited");
 			}
-			else { console.log("Sorry users must be older than 14 years old")}
-
-		});
+		})
 	})
 </script>

@@ -8,9 +8,9 @@ var userSchema = new mongoose.Schema({
     last_name: {type: String},
     country: {type: String},
     email: {type: String},
-    birth_day: {type: String},
-    birth_month: {type: String},
-    birth_year: {type: String},
+    birth_day: {type: Number},
+    birth_month: {type: Number},
+    birth_year: {type: Number},
     privacy_check: {type: Boolean}
   }
 })

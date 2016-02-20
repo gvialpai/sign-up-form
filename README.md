@@ -16,4 +16,5 @@ Deliverable: set up a working example of the form, either online for us to look 
 1) Changing input-type="text" to input-type="email"
 2) Requiring all fields
 3) Disabled selected all first options of drop down menus
-4) Adding on click submit javascript function for the submit button
+4) Adding on click submit Javascript function for the submit button
+5) Adding Javascript for age
