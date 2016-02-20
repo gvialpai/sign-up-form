@@ -1,0 +1,39 @@
+APPLICANT TASKS:
+
+#1 will be a straightforward server-side form validation exercise.
+#2 will be an exercise to scrape data from a social network API (Instagram and Twitter) and display it on a web page as an aggregated timeline.
+
+
+# TASK 1:
+Validate the included form (form.html) client side for the following:
+- The following are required fields: contest1_name, first_name, country, email, birth_day, birth_month, birth_year, privacy_check
+- Validate that the email address is the correct email format
+- Validate that the user is older than 14 years old based on the current date
+
+Considerations for task 1:
+- Are there any improvements you could make to the way the form works?
+- Your validation code must run on client side .html page only.
+
+Deliverable: set up a working example of the form, either online for us to look at, or locally on a machine to bring and show us.
+
+
+
+# TASK 2:
+Display the latest 5 posts each from social media feeds of your choosing for Twitter & Instagram on a web page, pulling the data from the platform’s API.
+- All posts must be aggregated and displayed in one timeline.
+- Display in date order from newest to oldest.
+
+Considerations for task 2:
+- Ability to flag/hide posts from appearing on the web page.
+- Dealing with throttling restrictions from APIs.
+- Displaying content based on the feeds different media content types (text, photos and video).
+
+Deliverable: set up a working example of the page, either online for us to look at, or locally on a machine to bring and show us. You will have access to our guest WIFI.
+
+
+Please prepare these tasks to be displayed and discussed as part of the interview.
+
+- February 2016.
+
+
+
