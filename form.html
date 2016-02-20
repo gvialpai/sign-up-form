@@ -273,7 +273,7 @@
 		<input type="email" name="email" placeholder="name@email.com" required/>
 
 		<label>Date of Birth</label>
-		<select name="birth_day" required>
+		<select name="birth_day" id="birth_day" required>
 			<option value="" disabled selected>DD</option>
 			<option value="1">1</option>
 			<option value="2">2</option>
@@ -307,7 +307,7 @@
 			<option value="30">30</option>
 			<option value="31">31</option>
 		</select>
-		<select name="birth_month" required>
+		<select name="birth_month" id="birth_month" required>
 			<option value="" disabled selected>MM</option>
 			<option value="JAN">January</option>
 			<option value="FEB">February</option>
@@ -322,7 +322,7 @@
 			<option value="NOV">November</option>
 			<option value="DEC">December</option>
 		</select>
-		<select name="birth_year" required>
+		<select name="birth_year" id="birth_year" required>
 			<option value="" disabled selected>YYYY</option>
 			<option value="2014">2014</option>
 			<option value="2013">2013</option>
@@ -442,9 +442,34 @@
 
 		var form = document.getElementById("sign-up-form");
 
+		function calculateAge(){
+
+			var birthMonthArray=["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+
+			var birth_month = birthMonthArray.indexOf(document.getElementById('birth_month').value) + 1;
+
+			var dateObj = new Date();
+
+			var age = dateObj.getUTCFullYear() - parseInt(document.getElementById('birth_year').value);
+
+			var month = (dateObj.getUTCMonth() + 1) - birth_month;
+
+			if (month < 0 || (month === 0 && dateObj.getUTCDate() < parseInt(document.getElementById('birth_day').value))) {
+			    age--;
+			}
+			return age
+
+		}
+
 		document.getElementById("submit-form").addEventListener("click", function () {
-		  form.submit();
-		  console.log("Form Submited");
+
+			age = calculateAge();
+			if (age >= 14){
+				form.submit();
+				console.log("Form Submited");
+			}
+			else { console.log("Sorry users must be older than 14 years old")}
+
 		});
 	})
 </script>
