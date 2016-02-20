@@ -484,37 +484,43 @@
 			var birth_month = document.getElementById("birth_month").value;
 			var birth_year = document.getElementById("birth_year").value;
 
+			var instruction = document.createElement("p");
+			var element = document.getElementById("sign-up-form");
+			element.appendChild(instruction);
+
 			age = calculateAge();
 
 			if (contest1 == ""){
-		    console.log("Please select a music style")
+		    var instruction1 = document.createTextNode("Please select a music style");
+		    instruction.appendChild(instruction1);
 			}
 			if (first_name == ""){
-				console.log("Please enter your first name")
+				var instruction2 = document.createTextNode("Please enter your first name");
+				instruction.appendChild(instruction2);
 			}
 			if (last_name == ""){
-				console.log("Please enter your last name")
+				var instruction3 = document.createTextNode("Please enter your last name");
+				instruction.appendChild(instruction3);
 			}
 			if (country == ""){
-		    console.log("Please select a country of residence")
+		    var instruction4 = document.createTextNode("Please select a country of residence");
+		    instruction.appendChild(instruction4);
 			} 
-			if (birth_day == ""){
-				console.log("Please enter your day of birth")
-			}
-			if (birth_month == ""){
-				console.log("Please enter your month of birth")
-			}
-			if (birth_year == ""){
-				console.log("Please enter your year of birth")
+			if (birth_day == "" || birth_month == "" || birth_year == ""){
+				var instruction5 = document.createTextNode("Please enter your birthday");
+				instruction.appendChild(instruction5);
 			}
 			if (age <14){ 
-							console.log("Sorry users must be older than 14 years old")
-						}
+				var instruction8 = document.createTextNode("Sorry users must be older than 14 years old");
+				instruction.appendChild(instruction8);
+			}
 			if (!validateEmail(email)){
-				console.log("Please enter a valid email address")
+				var instruction9 = document.createTextNode("Please enter a valid email address");
+				instruction.appendChild(instruction9);
 			}
 			if(!this.form.privacy_check.checked) {
-			  console.log('You must agree to the terms first.');
+			  var instruction10 = document.createTextNode('You must agree to the terms first.');
+			  instruction.appendChild(instruction10);
 			}
 			if (((contest1 && first_name) && (last_name && country)) && (age >= 14 && this.form.privacy_check.checked)){
 				console.log("music style and first name and last name and country selected and over 14 and privacy checked")
