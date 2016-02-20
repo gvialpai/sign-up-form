@@ -5,11 +5,11 @@
 </head>
 <body>
 
-	<form>
+	<form id="sign-up-form">
 
 		<label for="contest1_name">What is your favourite music?</label>
-		<select name="contest1_name">
-			<option value="" selected>Select Your Answer</option>
+		<select name="contest1_name" required>
+			<option value="" disabled selected>Select Your Answer</option>
 			<option value="Rock/Metal">Rock/Metal</option>
 			<option value="Urban/R&B ">Urban/R&B </option>
 			<option value="Indie/Alt">Indie/Alt</option>
@@ -17,14 +17,14 @@
 		</select>
 
 		<label for="first_name">First name:</label>
-		<input type="text" name="first_name" />
+		<input type="text" name="first_name" required/>
 
 		<label for="last_name">Last name:</label>
-		<input type="text" name="last_name" />
+		<input type="text" name="last_name" required/>
 
 		<label>Country/Region</label>
-		<select name="country">
-			<option value="">Select Your Country/Region</option>
+		<select name="country" required>
+			<option value = "" disabled selected>Select Your Country/Region</option>
 			<option value="GB">United Kingdom</option>
 			<option value="AF">Afghanistan</option>
 			<option value="AX">Aland Islands</option>
@@ -270,11 +270,11 @@
 		</select>
 
 		<label for="email">Email:</label>
-		<input type="text" name="email" />
+		<input type="email" name="email" placeholder="name@email.com" required/>
 
 		<label>Date of Birth</label>
-		<select name="birth_day">
-			<option value="">DD</option>
+		<select name="birth_day" required>
+			<option value="" disabled selected>DD</option>
 			<option value="1">1</option>
 			<option value="2">2</option>
 			<option value="3">3</option>
@@ -307,8 +307,8 @@
 			<option value="30">30</option>
 			<option value="31">31</option>
 		</select>
-		<select name="birth_month">
-			<option value="">MM</option>
+		<select name="birth_month" required>
+			<option value="" disabled selected>MM</option>
 			<option value="JAN">January</option>
 			<option value="FEB">February</option>
 			<option value="MAR">March</option>
@@ -322,8 +322,8 @@
 			<option value="NOV">November</option>
 			<option value="DEC">December</option>
 		</select>
-		<select name="birth_year">
-			<option value="">YYYY</option>
+		<select name="birth_year" required>
+			<option value="" disabled selected>YYYY</option>
 			<option value="2014">2014</option>
 			<option value="2013">2013</option>
 			<option value="2012">2012</option>
@@ -427,12 +427,24 @@
 			<option value="1914">1914</option>
 		</select>
 
-		<input type="checkbox" name="privacy_check" />
+		<input type="checkbox" name="privacy_check" required/>
 		<label for="privacy_check">I have read and understood the Terms and Conditions.</label>
 
-		<input type="button" name="ch_access" value="Submit" />
+		<input type="button" name="ch_access" value="Submit" id="submit-form"/>
 
 	</form>
 
 </body>
 </html>
+
+<script type="text/javascript">
+	window.addEventListener("DOMContentLoaded", function () {
+
+		var form = document.getElementById("sign-up-form");
+
+		document.getElementById("submit-form").addEventListener("click", function () {
+		  form.submit();
+		  console.log("Form Submited");
+		});
+	})
+</script>
