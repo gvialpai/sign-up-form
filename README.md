@@ -18,3 +18,8 @@ Deliverable: set up a working example of the form, either online for us to look 
 3) Disabled selected all first options of drop down menus
 4) Adding on click submit Javascript function for the submit button
 5) Adding Javascript for age
+
+
+Camel 
+Put calls at the bottom
+flag invalid fields

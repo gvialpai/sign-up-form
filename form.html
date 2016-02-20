@@ -432,101 +432,104 @@
 
 		<input type="button" name="ch_access" value="Submit" id="submit-form"/>
 
+		<ul id="instruction-list">
+			
+		</ul>
 	</form>
+	<script type="text/javascript">
+		window.addEventListener("DOMContentLoaded", function () {
+
+			var form = document.getElementById("sign-up-form");
+
+			function calculateAge(birthDay, birthMonth, birthYear){
+			    var birthMonthArray = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
+			        birthMonth = birthMonthArray.indexOf(birthMonth) + 1,
+			        currentDate = new Date(),
+			        month = (currentDate.getUTCMonth() + 1) - birthMonth,
+			        age = currentDate.getUTCFullYear() - parseInt(birthYear);
+			        
+			    if (month < 0 || (month === 0 && currentDate.getUTCDate() < parseInt(birthDay))) {
+			        age--;
+			    }
+			    return age
+			}
+
+			function validateEmail(email) { 
+			    var re =  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			    return re.test(email);
+			}
+
+			document.getElementById("submit-form").addEventListener("click", function () {
+			    var contestInput = document.getElementById("contest1_name-selection"),
+			        firstNameInput = document.getElementById("first_name"),
+			        lastNameInput = document.getElementById("last_name"),
+			        countryInput = document.getElementById("country-selection"),
+			        emailInput = document.getElementById("email"),
+			        birthDayInput = document.getElementById("birth_day"),
+			        birthMonthInput = document.getElementById("birth_month"),
+			        birthYearInput = document.getElementById("birth_year"),
+			        instructionListItem = document.createElement("li"),
+			        age = calculateAge(birthDayInput.value, birthMonthInput.value, birthYearInput.value);
+			    
+			    document.getElementById('instruction-list').appendChild(instructionListItem);
+
+			    validationErrors = {
+			        contest: {
+			            validationError: !contestInput.value,
+			            errorMessage: "Please select a music style"
+			        },
+			        firstName: {
+			            validationError: !firstNameInput.value,
+			            errorMessage: "Please enter your first name"
+			        },
+			        lastName: {
+			            validationError: !lastNameInput.value,
+			            errorMessage: "Please enter your last name"
+			        },
+			        country: {
+			            validationError: !countryInput.value,
+			            errorMessage: "Please select a country of residence"
+			        },
+			        birthDay: {
+			            validationError: (!birthDayInput.value || !birthMonthInput.value || !birthYearInput.value),
+			            errorMessage: "Please enter your birthday"
+			        },
+			        age: {
+			            validationError: age < 14,
+			            errorMessage: "Sorry users must be older than 14 years old"
+			        },
+			        email: {
+			            validationError: !validateEmail(emailInput.value),
+			            errorMessage: "Please enter a valid email address"
+			        },
+			        terms: { 
+			            validationError: !this.form.privacy_check.checked,
+			            errorMessage: "You must agree to the terms first."    
+			        }
+			    };
+
+			    for (var validations in validationErrors) {
+			    	var validation = validationErrors[validations],
+			    	    validationError = validation[Object.keys(validation)[0]],
+			    	    errorMessage = validation[Object.keys(validation)[1]];
+
+			    	if (validationError == true){
+			    		console.log(errorMessage);
+			    		var instruction = document.createTextNode(errorMessage);
+			    		instructionListItem.appendChild(instruction);
+			    	}
+					}
+
+			    if (contestInput.value && firstNameInput.value && lastNameInput.value && countryInput.value && (age >= 14) && this.form.privacy_check.checked && validateEmail(emailInput.value)){
+			        console.log("music style and first name and last name and country selected and over 14 and privacy checked")
+			        form.submit();     
+			        console.log("Form Submited");
+			    }
+			})
+})
+	</script>
 
 </body>
+
 </html>
 
-<script type="text/javascript">
-	window.addEventListener("DOMContentLoaded", function () {
-
-		var form = document.getElementById("sign-up-form");
-
-		function calculateAge(){
-
-			var birthMonthArray=["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-
-			var birth_month = birthMonthArray.indexOf(document.getElementById('birth_month').value) + 1;
-
-			var dateObj = new Date();
-
-			var age = dateObj.getUTCFullYear() - parseInt(document.getElementById('birth_year').value);
-
-			var month = (dateObj.getUTCMonth() + 1) - birth_month;
-
-			if (month < 0 || (month === 0 && dateObj.getUTCDate() < parseInt(document.getElementById('birth_day').value))) {
-			    age--;
-			}
-			return age
-		}
-
-	function validateEmail(email) { 
-    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-		}
-		function validate(){
-		  var email = document.getElementById('email').value;
-		  if (validateEmail(email)) {
-		  	console.log("valid email address")
-		  } else {
-		  	console.log("invalid email address")
-		  }
-		  return false;
-		}
-
-		document.getElementById("submit-form").addEventListener("click", function () {
-
-			var contest1 = document.getElementById("contest1_name-selection").value;
-			var first_name = document.getElementById("first_name").value;
-			var last_name = document.getElementById("last_name").value;
-			var country = document.getElementById("country-selection").value;
-			var birth_day = document.getElementById("birth_day").value;
-			var birth_month = document.getElementById("birth_month").value;
-			var birth_year = document.getElementById("birth_year").value;
-
-			var instruction = document.createElement("p");
-			var element = document.getElementById("sign-up-form");
-			element.appendChild(instruction);
-
-			age = calculateAge();
-
-			if (contest1 == ""){
-		    var instruction1 = document.createTextNode("Please select a music style");
-		    instruction.appendChild(instruction1);
-			}
-			if (first_name == ""){
-				var instruction2 = document.createTextNode("Please enter your first name");
-				instruction.appendChild(instruction2);
-			}
-			if (last_name == ""){
-				var instruction3 = document.createTextNode("Please enter your last name");
-				instruction.appendChild(instruction3);
-			}
-			if (country == ""){
-		    var instruction4 = document.createTextNode("Please select a country of residence");
-		    instruction.appendChild(instruction4);
-			} 
-			if (birth_day == "" || birth_month == "" || birth_year == ""){
-				var instruction5 = document.createTextNode("Please enter your birthday");
-				instruction.appendChild(instruction5);
-			}
-			if (age <14){ 
-				var instruction8 = document.createTextNode("Sorry users must be older than 14 years old");
-				instruction.appendChild(instruction8);
-			}
-			if (!validateEmail(email)){
-				var instruction9 = document.createTextNode("Please enter a valid email address");
-				instruction.appendChild(instruction9);
-			}
-			if(!this.form.privacy_check.checked) {
-			  var instruction10 = document.createTextNode('You must agree to the terms first.');
-			  instruction.appendChild(instruction10);
-			}
-			if (((contest1 && first_name) && (last_name && country)) && (age >= 14 && this.form.privacy_check.checked)){
-				console.log("music style and first name and last name and country selected and over 14 and privacy checked")
-				form.submit();
-				console.log("Form Submited");
-			}
-		})
-	})
-</script>
