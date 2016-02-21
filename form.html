@@ -443,13 +443,14 @@
 
 			function calculateAge(birthDay, birthMonth, birthYear){
 			    var birthMonthArray = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
-			        birthMonth = birthMonthArray.indexOf(birthMonth) + 1,
-			        currentDate = new Date(),
-			        month = (currentDate.getUTCMonth() + 1) - birthMonth,
-			        age = currentDate.getUTCFullYear() - parseInt(birthYear);
+			        birthMonth      = birthMonthArray.indexOf(birthMonth) + 1,
+			        currentDate     = new Date(),
+			        month           = (currentDate.getUTCMonth() + 1) - birthMonth,
+			        age             = currentDate.getUTCFullYear() - parseInt(birthYear),
+			        day             = currentDate.getUTCDate() - parseInt(birthDay)
 			        
-			    if (month < 0 || (month === 0 && currentDate.getUTCDate() < parseInt(birthDay))) {
-			        age--;
+			    if (month < 0 || (month === 0 && day < 0)) {
+			      age--;
 			    }
 			    return age
 			}
@@ -474,38 +475,38 @@
 			    document.getElementById('instruction-list').appendChild(instructionListItem);
 
 			    validationErrors = {
-			        contest: {
-			            validationError: !contestInput.value,
-			            errorMessage: "Please select a music style"
-			        },
-			        firstName: {
-			            validationError: !firstNameInput.value,
-			            errorMessage: "Please enter your first name"
-			        },
-			        lastName: {
-			            validationError: !lastNameInput.value,
-			            errorMessage: "Please enter your last name"
-			        },
-			        country: {
-			            validationError: !countryInput.value,
-			            errorMessage: "Please select a country of residence"
-			        },
-			        birthDay: {
-			            validationError: (!birthDayInput.value || !birthMonthInput.value || !birthYearInput.value),
-			            errorMessage: "Please enter your birthday"
-			        },
-			        age: {
-			            validationError: age < 14,
-			            errorMessage: "Sorry users must be older than 14 years old"
-			        },
-			        email: {
-			            validationError: !validateEmail(emailInput.value),
-			            errorMessage: "Please enter a valid email address"
-			        },
-			        terms: { 
-			            validationError: !this.form.privacy_check.checked,
-			            errorMessage: "You must agree to the terms first."    
-			        }
+		        contest: {
+	            validationError: !contestInput.value,
+	            errorMessage: "Please select a music style"
+		        },
+		        firstName: {
+	            validationError: !firstNameInput.value,
+	            errorMessage: "Please enter your first name"
+		        },
+		        lastName: {
+	            validationError: !lastNameInput.value,
+	            errorMessage: "Please enter your last name"
+		        },
+		        country: {
+	            validationError: !countryInput.value,
+	            errorMessage: "Please select a country of residence"
+		        },
+		        birthDay: {
+	            validationError: (!birthDayInput.value || !birthMonthInput.value || !birthYearInput.value),
+	            errorMessage: "Please enter your birthday"
+		        },
+		        age: {
+	            validationError: age < 14,
+	            errorMessage: "Sorry users must be older than 14 years old"
+		        },
+		        email: {
+	            validationError: !validateEmail(emailInput.value),
+	            errorMessage: "Please enter a valid email address"
+		        },
+		        terms: { 
+	            validationError: !this.form.privacy_check.checked,
+	            errorMessage: "You must agree to the terms first."    
+		        }
 			    };
 
 
@@ -533,7 +534,7 @@
 	    				console.log("Form Submited");
 	    			};
 	    		}
-
+	    		
 				  checkResult();
 			})
 		})
